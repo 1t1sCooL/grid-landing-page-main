@@ -265,6 +265,27 @@ button {
 }
 
 /* --------------------------------------------------------------------------
+   Frontend Mentor attribution — below the full-height page, not part of it
+   -------------------------------------------------------------------------- */
+
+.attribution {
+  padding: 16px var(--gutter);
+  color: var(--blue-200);
+  font-size: 11px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.attribution a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.attribution a:hover {
+  color: var(--white);
+}
+
+/* --------------------------------------------------------------------------
    Menu
    -------------------------------------------------------------------------- */
 
