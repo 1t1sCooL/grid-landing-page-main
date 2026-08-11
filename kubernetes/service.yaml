@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: grid-landing-page-main
+  namespace: default
+spec:
+  selector:
+    app: grid-landing-page-main-app
+  ports:
+    - port: 80
+      targetPort: 80
+  type: ClusterIP

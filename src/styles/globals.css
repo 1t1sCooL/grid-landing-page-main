@@ -1,0 +1,417 @@
+/* ==========================================================================
+   Frontend Mentor — Grid landing page
+   Design sizes: 375px (mobile) and 1440px (desktop).
+   ========================================================================== */
+
+:root {
+  /* style-guide.md */
+  --white: hsl(0, 0%, 100%);
+  --blue-200: hsl(224, 100%, 95%);
+  --blue-400: hsl(220, 100%, 64%);
+  --blue-600: hsl(228, 100%, 60%);
+  --blue-700: hsl(228, 99%, 58%);
+  --overlay: hsl(0 0% 0% / 25%);
+
+  /* Mobile metrics, overridden in the desktop media query. */
+  --gutter: 24px;
+  --hero-gutter: 32px;
+  --card-pad: 24px;
+  --header-h: 72px;
+  --footer-h: 90px;
+  --hero-h: 341px;
+  --stat-h: 327.5px; /* includes the 1px divider */
+  --title-size: 43px;
+  --title-lh: 1.105;
+  --title-gap: 23px;
+  --hairline: 1px solid var(--blue-400);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--blue-700);
+  color: var(--white);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.app {
+  /*
+   * Inter 4 ships an `opsz` axis (14 → 32). Chrome's default
+   * `font-optical-sizing: auto` would switch the display cut in at large sizes
+   * and render the headline noticeably tighter than the reference design,
+   * which was set with the text cut throughout.
+   */
+  font-family: var(--font-inter), "Inter", system-ui, sans-serif;
+  font-optical-sizing: none;
+  letter-spacing: normal;
+}
+
+svg {
+  display: block;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------------------------------
+   Page shell
+   -------------------------------------------------------------------------- */
+
+.page {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.page__body {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
+/* --------------------------------------------------------------------------
+   Header
+   -------------------------------------------------------------------------- */
+
+.site-header {
+  display: flex;
+  height: calc(var(--header-h) + 1px);
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: var(--gutter);
+  border-bottom: var(--hairline);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.logo__dot {
+  width: 10px;
+  height: 10px;
+  flex: none;
+  border-radius: 50%;
+  background-color: var(--white);
+}
+
+/* Keeps the 24px icon flush with the gutter while offering a 48px tap target. */
+.menu-toggle {
+  display: grid;
+  padding: 12px;
+  margin: -12px;
+  place-items: center;
+}
+
+/* --------------------------------------------------------------------------
+   Grid
+   -------------------------------------------------------------------------- */
+
+.grid {
+  display: grid;
+  flex: 1 1 auto;
+  grid-template-columns: 1fr;
+}
+
+/* --------------------------------------------------------------------------
+   Hero
+   -------------------------------------------------------------------------- */
+
+.hero {
+  display: grid;
+  min-height: var(--hero-h);
+  align-content: center;
+  padding-block: 33px 32px;
+  padding-inline: var(--hero-gutter);
+}
+
+.hero__inner {
+  max-width: 400px;
+}
+
+.hero__title {
+  font-size: var(--title-size);
+  font-weight: 400;
+  letter-spacing: -0.032em;
+  line-height: var(--title-lh);
+}
+
+.hero__text {
+  margin-top: var(--title-gap);
+  color: var(--blue-200);
+  line-height: 28.5px;
+}
+
+/* --------------------------------------------------------------------------
+   Stat cards
+   -------------------------------------------------------------------------- */
+
+.stat {
+  position: relative;
+  display: flex;
+  min-height: var(--stat-h);
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--card-pad);
+  border-top: var(--hairline);
+  transition: background-color 0.2s ease;
+}
+
+.stat:hover,
+.stat:has(.stat__link:focus-visible) {
+  background-color: var(--blue-600);
+}
+
+.stat:has(.stat__link:focus-visible) {
+  outline: 2px solid var(--white);
+  outline-offset: -4px;
+}
+
+.stat__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stat__icon {
+  width: 32px;
+  height: 32px;
+  flex: none;
+}
+
+.stat__value {
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 38px;
+}
+
+.stat__label {
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* The card is the click target; the link keeps the accessible name. */
+.stat__link::after {
+  position: absolute;
+  content: "";
+  inset: 0;
+}
+
+.stat__link:focus-visible {
+  outline: none;
+}
+
+.stat__description {
+  color: var(--blue-200);
+  font-size: 14px;
+  letter-spacing: -0.02em;
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+
+.site-footer {
+  display: flex;
+  height: calc(var(--footer-h) + 1px);
+  flex: none;
+  flex-direction: column;
+  justify-content: center;
+  padding-inline: var(--gutter);
+  border-top: var(--hairline);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* --------------------------------------------------------------------------
+   Menu
+   -------------------------------------------------------------------------- */
+
+.menu-overlay {
+  position: absolute;
+  z-index: 1;
+  background-color: var(--overlay);
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.menu-overlay[data-open="true"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.menu {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  height: var(--hero-h);
+  align-content: center;
+  justify-items: center;
+  padding-inline: var(--gutter);
+  background-color: var(--blue-700);
+  text-align: center;
+  inset: 0 0 auto;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+/* `inert` keeps the closed panel out of the a11y tree, so opacity alone is
+   enough to hide it visually. */
+.menu[data-open="true"] {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
+
+.menu:focus {
+  outline: none;
+}
+
+.menu__link {
+  display: inline-block;
+  /* Balances the trailing letter-spacing so the right-aligned edge stays true. */
+  padding-right: 0.045em;
+  font-size: 32px;
+  letter-spacing: -0.045em;
+  line-height: 1.6;
+}
+
+.menu__link:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
+}
+
+/* --------------------------------------------------------------------------
+   Tablet — hero on top, stats in a 2 x 2 grid
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 48px;
+    --hero-gutter: 48px;
+    --card-pad: 32px;
+    --footer-h: 72px;
+    --title-size: 60px;
+    --title-lh: 1.05;
+    --title-gap: 40px;
+  }
+
+  .site-footer {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero {
+    padding-block: 36px 32px;
+    grid-column: 1 / -1;
+  }
+
+  .stat:nth-of-type(even) {
+    border-left: var(--hairline);
+  }
+
+  .menu {
+    justify-items: end;
+    text-align: right;
+    padding-inline: var(--gutter);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Desktop — 1440px reference layout
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 648fr 396fr 396fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .hero {
+    min-height: 0;
+    grid-column: 1;
+    grid-row: 1 / 3;
+  }
+
+  .stat {
+    min-height: 0;
+    border-top: 0;
+    border-left: var(--hairline);
+  }
+
+  .stat:nth-of-type(3),
+  .stat:nth-of-type(4) {
+    border-top: var(--hairline);
+  }
+
+  .menu {
+    width: 396px;
+    height: auto;
+    align-content: start;
+    padding: 48px;
+    inset: 0 0 0 auto;
+    transform: translateX(8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

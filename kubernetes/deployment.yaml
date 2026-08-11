@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grid-landing-page-main-app
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grid-landing-page-main-app
+  template:
+    metadata:
+      labels:
+        app: grid-landing-page-main-app
+    spec:
+      containers:
+        - name: grid-landing-page-main-app
+          image: grid-landing-page-main-app:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: NODE_ENV
+              value: "production"
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 10
