@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import Attribution from "./GridBody/Attribution";
 import Hero from "./GridBody/Hero";
 import MenuPanel from "./GridBody/MenuPanel";
 import SiteFooter from "./GridBody/SiteFooter";
@@ -79,33 +80,37 @@ export default function GridBody() {
   }, [menuOpen]);
 
   return (
-    <div className="page" data-menu-open={menuOpen}>
-      <SiteHeader
-        menuOpen={menuOpen}
-        onToggleMenu={() => (menuOpen ? closeMenu() : setMenuOpen(true))}
-        menuId={MENU_ID}
-        buttonRef={toggleRef}
-      />
-
-      {/* While the menu is open the page behind it is inert, so Tab cannot
-          escape into content the overlay has already dimmed out. */}
-      <div className="page__body">
-        <main className="grid" inert={menuOpen}>
-          <Hero />
-          {STATS.map((stat) => (
-            <StatCard key={stat.id} {...stat} />
-          ))}
-        </main>
-
-        <SiteFooter inert={menuOpen} />
-
-        <MenuPanel
-          id={MENU_ID}
-          open={menuOpen}
-          onClose={closeMenu}
-          panelRef={panelRef}
+    <>
+      <div className="page" data-menu-open={menuOpen}>
+        <SiteHeader
+          menuOpen={menuOpen}
+          onToggleMenu={() => (menuOpen ? closeMenu() : setMenuOpen(true))}
+          menuId={MENU_ID}
+          buttonRef={toggleRef}
         />
+
+        {/* While the menu is open the page behind it is inert, so Tab cannot
+            escape into content the overlay has already dimmed out. */}
+        <div className="page__body">
+          <main className="grid" inert={menuOpen}>
+            <Hero />
+            {STATS.map((stat) => (
+              <StatCard key={stat.id} {...stat} />
+            ))}
+          </main>
+
+          <SiteFooter inert={menuOpen} />
+
+          <MenuPanel
+            id={MENU_ID}
+            open={menuOpen}
+            onClose={closeMenu}
+            panelRef={panelRef}
+          />
+        </div>
       </div>
-    </div>
+
+      <Attribution inert={menuOpen} />
+    </>
   );
 }
