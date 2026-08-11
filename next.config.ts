@@ -7,8 +7,7 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  // The `deploy` branch pins basePath to "/GridLandingPage" for the nginx
-  // sub-path build. On `main` the export stays at the root, for Vercel.
+  basePath: "/GridLandingPage",
 };
 
 export default nextConfig;
