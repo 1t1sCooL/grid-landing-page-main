@@ -3,7 +3,6 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-ENV NEXT_PUBLIC_BASE_PATH=/GridLandingPage
 RUN npm run build
 
 FROM nginx:alpine

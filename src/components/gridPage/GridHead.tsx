@@ -1,8 +1,11 @@
 import Head from "next/head";
-
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+import { useRouter } from "next/router";
 
 export default function GridHead() {
+  // basePath is empty on `main` (Vercel, served at the root) and
+  // "/GridLandingPage" on `deploy`, so the favicon resolves on both.
+  const { basePath } = useRouter();
+
   return (
     <Head>
       <meta charSet="utf-8" />

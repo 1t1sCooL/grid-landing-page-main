@@ -32,7 +32,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [github.com/1t1sCooL/grid-landing-page-main](https://github.com/1t1sCooL/grid-landing-page-main)
+- Solution URL: [Vercel](https://grid-landing-page-main.vercel.app/)
 - Live Site URL: [mmalabugin.ru/GridLandingPage/](https://mmalabugin.ru/GridLandingPage/)
 
 ## My process
@@ -111,15 +111,20 @@ npm run build   # static export into ./out
 npm run lint
 ```
 
-`NEXT_PUBLIC_BASE_PATH` sets the sub-path the export is built for. It is empty locally and
-`/GridLandingPage` in the Docker build.
-
 ## Deployment
 
-The image is built by Jenkins from the `Dockerfile` (Node build → static files served by
-nginx) and applied to Kubernetes with kustomize:
+Two branches, one codebase:
+
+| Branch   | `basePath`          | Target                                                       |
+| -------- | ------------------- | ------------------------------------------------------------ |
+| `main`   | none (root)         | [Vercel](https://grid-landing-page-main.vercel.app/)          |
+| `deploy` | `/GridLandingPage`  | [mmalabugin.ru/GridLandingPage/](https://mmalabugin.ru/GridLandingPage/) |
+
+`deploy` is what Jenkins builds: the `Dockerfile` runs the Next export and copies `out/`
+into nginx under the sub-path, then the manifests are applied with kustomize.
 
 ```bash
+git checkout deploy
 docker build -t 1t1scool/grid-landing-page-main .
 kubectl apply -k kubernetes/
 ```
